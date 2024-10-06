@@ -1,4 +1,4 @@
-package com.example.smaap.health.dto;
+package com.example.smaap.application.health.dto;
 
 import lombok.Getter;
 import lombok.Setter;
