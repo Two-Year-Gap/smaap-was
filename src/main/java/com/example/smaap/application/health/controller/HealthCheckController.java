@@ -1,6 +1,6 @@
-package com.example.smaap.health.controller;
+package com.example.smaap.application.health.controller;
 
-import com.example.smaap.health.service.HealthCheckService;
+import com.example.smaap.application.health.service.HealthCheckService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;

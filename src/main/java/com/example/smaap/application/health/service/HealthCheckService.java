@@ -1,6 +1,6 @@
-package com.example.smaap.health.service;
+package com.example.smaap.application.health.service;
 
-import com.example.smaap.health.dto.HealthCheckDto;
+import com.example.smaap.application.health.dto.HealthCheckDto;
 import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
