@@ -7,6 +7,7 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
@@ -48,4 +49,20 @@ public class School extends BaseEntity {
 
     @Column(name = "longitude", precision = 13, scale = 10, nullable = false)
     private BigDecimal longitude;
+
+    @Builder
+
+    public School(String name, Long studentCount, Long employeeCount, SchoolType type, SchoolGenderType gender, String lotNumberAddress, String lotNumberZipCode, String readNameAddress, String readNameZipCode, BigDecimal latitude, BigDecimal longitude) {
+        this.name = name;
+        this.studentCount = studentCount;
+        this.employeeCount = employeeCount;
+        this.type = type;
+        this.gender = gender;
+        this.lotNumberAddress = lotNumberAddress;
+        this.lotNumberZipCode = lotNumberZipCode;
+        this.readNameAddress = readNameAddress;
+        this.readNameZipCode = readNameZipCode;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 }
