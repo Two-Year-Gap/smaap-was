@@ -1,4 +1,4 @@
-package com.example.smaap.application.health.controller;
+package com.example.smaap.presentation.controller;
 
 import com.example.smaap.application.health.service.HealthCheckService;
 import io.swagger.v3.oas.annotations.Operation;
