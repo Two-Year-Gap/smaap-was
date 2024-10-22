@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/school")
+@RequestMapping("/schools")
 @Tag(name = "School", description = "학교 정보 API")
 @RequiredArgsConstructor
 public class SchoolController {
