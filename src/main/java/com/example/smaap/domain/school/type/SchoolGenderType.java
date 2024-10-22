@@ -1,4 +1,4 @@
-package com.example.smaap.application.school.type;
+package com.example.smaap.domain.school.type;
 
 public enum SchoolGenderType {
     COEDUCATIONAL,

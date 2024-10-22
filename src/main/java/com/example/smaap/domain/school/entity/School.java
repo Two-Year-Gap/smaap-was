@@ -1,8 +1,8 @@
-package com.example.smaap.application.school.entity;
+package com.example.smaap.domain.school.entity;
 
-import com.example.smaap.application.school.type.SchoolGenderType;
-import com.example.smaap.application.school.type.SchoolType;
 import com.example.smaap.common.entity.BaseEntity;
+import com.example.smaap.domain.school.type.SchoolGenderType;
+import com.example.smaap.domain.school.type.SchoolType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;

@@ -1,4 +1,4 @@
-package com.example.smaap.application.business.entity;
+package com.example.smaap.domain.business.entity;
 
 import com.example.smaap.common.entity.BaseEntity;
 import jakarta.persistence.Column;

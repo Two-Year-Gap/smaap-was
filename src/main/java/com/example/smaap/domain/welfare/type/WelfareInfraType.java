@@ -1,4 +1,4 @@
-package com.example.smaap.application.welfare.type;
+package com.example.smaap.domain.welfare.type;
 
 public enum WelfareInfraType {
     EMERGENCY_BELL,
