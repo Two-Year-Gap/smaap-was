@@ -23,8 +23,10 @@ public class Store extends BaseEntity {
     @Column(name = "road_name_address", length = 100)
     private String readNameAddress;
 
-    public Store(String name, Business business) {
+    public Store(String name, Business business, String lotNumberAddress, String readNameAddress) {
         this.name = name;
         this.business = business;
+        this.lotNumberAddress = lotNumberAddress;
+        this.readNameAddress = readNameAddress;
     }
 }
