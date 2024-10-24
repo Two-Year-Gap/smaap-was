@@ -52,9 +52,14 @@ public class School extends BaseEntity {
     @Column(name = "longitude", precision = 13, scale = 10, nullable = false)
     private BigDecimal longitude;
 
-    @Builder
+    @Column(name = "last_year_student_count")
+    private Long lastYearStudentCount;
 
-    public School(String name, Long studentCount, Long employeeCount, SchoolType type, SchoolGenderType gender, String lotNumberAddress, String lotNumberZipCode, String readNameAddress, String readNameZipCode, BigDecimal latitude, BigDecimal longitude) {
+    @Column(name = "last_year_employee_count")
+    private Long lastYearEmployeeCount;
+
+    @Builder
+    public School(String name, Long studentCount, Long employeeCount, SchoolType type, SchoolGenderType gender, String lotNumberAddress, String lotNumberZipCode, String readNameAddress, String readNameZipCode, BigDecimal latitude, BigDecimal longitude, Long lastYearStudentCount, Long lastYearEmployeeCount) {
         this.name = name;
         this.studentCount = studentCount;
         this.employeeCount = employeeCount;
@@ -66,5 +71,7 @@ public class School extends BaseEntity {
         this.readNameZipCode = readNameZipCode;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.lastYearStudentCount = lastYearStudentCount;
+        this.lastYearEmployeeCount = lastYearEmployeeCount;
     }
 }
