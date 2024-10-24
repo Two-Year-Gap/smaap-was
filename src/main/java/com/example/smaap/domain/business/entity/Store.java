@@ -17,6 +17,12 @@ public class Store extends BaseEntity {
     @JoinColumn(name = "business_id", nullable = false)
     private Business business;
 
+    @Column(name = "lot_number_address", length = 100)
+    private String lotNumberAddress;
+
+    @Column(name = "road_name_address", length = 100)
+    private String readNameAddress;
+
     public Store(String name, Business business) {
         this.name = name;
         this.business = business;
