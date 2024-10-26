@@ -7,6 +7,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
+
 @Entity
 @NoArgsConstructor
 public class Store extends BaseEntity {
@@ -23,10 +25,18 @@ public class Store extends BaseEntity {
     @Column(name = "road_name_address", length = 100)
     private String readNameAddress;
 
-    public Store(String name, Business business, String lotNumberAddress, String readNameAddress) {
+    @Column(name = "latitude", precision = 12, scale = 10, nullable = false)
+    private BigDecimal latitude;
+
+    @Column(name = "longitude", precision = 13, scale = 10, nullable = false)
+    private BigDecimal longitude;
+
+    public Store(String name, Business business, String lotNumberAddress, String readNameAddress, BigDecimal latitude, BigDecimal longitude) {
         this.name = name;
         this.business = business;
         this.lotNumberAddress = lotNumberAddress;
         this.readNameAddress = readNameAddress;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 }
