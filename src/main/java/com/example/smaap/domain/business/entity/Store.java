@@ -29,12 +29,14 @@ public class Store extends BaseEntity {
     private BigDecimal latitude;
 
     @Column(name = "longitude", precision = 13, scale = 10, nullable = false)
-    private BigDecimal longitude; latitude;
+    private BigDecimal longitude;
 
-    public Store(String name, Business business, String lotNumberAddress, String readNameAddress) {
+    public Store(String name, Business business, String lotNumberAddress, String readNameAddress, BigDecimal latitude, BigDecimal longitude) {
         this.name = name;
         this.business = business;
         this.lotNumberAddress = lotNumberAddress;
         this.readNameAddress = readNameAddress;
+        this.latitude = latitude;
+        this.longitude = longitude;
     }
 }
