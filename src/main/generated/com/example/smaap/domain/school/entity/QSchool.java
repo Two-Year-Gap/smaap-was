@@ -28,6 +28,10 @@ public class QSchool extends EntityPathBase<School> {
     //inherited
     public final NumberPath<Long> id = _super.id;
 
+    public final NumberPath<Long> lastYearEmployeeCount = createNumber("lastYearEmployeeCount", Long.class);
+
+    public final NumberPath<Long> lastYearStudentCount = createNumber("lastYearStudentCount", Long.class);
+
     public final NumberPath<java.math.BigDecimal> latitude = createNumber("latitude", java.math.BigDecimal.class);
 
     public final NumberPath<java.math.BigDecimal> longitude = createNumber("longitude", java.math.BigDecimal.class);
