@@ -29,7 +29,15 @@ public class QStore extends EntityPathBase<Store> {
     //inherited
     public final NumberPath<Long> id = _super.id;
 
+    public final NumberPath<java.math.BigDecimal> latitude = createNumber("latitude", java.math.BigDecimal.class);
+
+    public final NumberPath<java.math.BigDecimal> longitude = createNumber("longitude", java.math.BigDecimal.class);
+
+    public final StringPath lotNumberAddress = createString("lotNumberAddress");
+
     public final StringPath name = createString("name");
+
+    public final StringPath readNameAddress = createString("readNameAddress");
 
     public QStore(String variable) {
         this(Store.class, forVariable(variable), INITS);
