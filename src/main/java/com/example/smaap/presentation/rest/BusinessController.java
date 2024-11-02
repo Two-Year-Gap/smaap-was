@@ -1,4 +1,4 @@
-package com.example.smaap.presentation.res;
+package com.example.smaap.presentation.rest;
 
 import com.example.smaap.domain.business.service.BusinessService;
 import io.swagger.v3.oas.annotations.Operation;
