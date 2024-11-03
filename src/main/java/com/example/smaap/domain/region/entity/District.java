@@ -3,11 +3,13 @@ package com.example.smaap.domain.region.entity;
 import com.example.smaap.common.entity.BaseEntity;
 import jakarta.persistence.*;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
+@Getter
 @NoArgsConstructor
 public class District extends BaseEntity {
     @ManyToOne

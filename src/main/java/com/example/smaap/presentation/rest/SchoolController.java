@@ -1,4 +1,4 @@
-package com.example.smaap.presentation.res;
+package com.example.smaap.presentation.rest;
 
 import com.example.smaap.domain.school.service.SchoolService;
 import com.example.smaap.domain.school.type.SchoolGenderType;
