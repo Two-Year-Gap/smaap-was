@@ -15,4 +15,8 @@ public class NeighborhoodService {
     public List<Neighborhood> list() {
         return neighborhoodRepository.findAll();
     }
+
+    public List<Neighborhood> list(Long districtId) {
+        return neighborhoodRepository.findAllByDistrictId(districtId);
+    }
 }
