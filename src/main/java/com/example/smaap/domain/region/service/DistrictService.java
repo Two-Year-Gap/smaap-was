@@ -15,4 +15,8 @@ public class DistrictService {
     public List<District> list() {
         return districtRepository.findAll();
     }
+
+    public List<District> list(Long regionId) {
+        return districtRepository.findAllByRegionId(regionId);
+    }
 }
