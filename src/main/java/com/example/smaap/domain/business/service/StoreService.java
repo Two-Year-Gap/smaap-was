@@ -15,7 +15,7 @@ import java.util.List;
 public class StoreService {
     private final StoreRepository storeRepository;
 
-    public List<Store> list(Long businessId, String address, BigDecimal latitude, BigDecimal longitude, Long range) {
+    public List<Store> list(Long businessId, String address, BigDecimal latitude, BigDecimal longitude, Long range, int size) {
         QStore qStore = QStore.store;
         BooleanBuilder builder = new BooleanBuilder();
 
@@ -28,17 +28,12 @@ public class StoreService {
                     .or(qStore.readNameAddress.containsIgnoreCase(address)));
         }
 
-        if (latitude != null && longitude != null && range != null) {
-            double rangeInDegree = range / 111.12;
-            double minLatitude = latitude.doubleValue() - rangeInDegree;
-            double maxLatitude = latitude.doubleValue() + rangeInDegree;
-            double minLongitude = longitude.doubleValue() - rangeInDegree;
-            double maxLongitude = longitude.doubleValue() + rangeInDegree;
-
-            builder.and(qStore.latitude.between(BigDecimal.valueOf(minLatitude), BigDecimal.valueOf(maxLatitude))
-                    .and(qStore.longitude.between(BigDecimal.valueOf(minLongitude), BigDecimal.valueOf(maxLongitude))));
+        if (latitude != null && longitude != null) {
+            BigDecimal rangeValue = BigDecimal.valueOf(range).divide(BigDecimal.valueOf(1000));
+            builder.and(qStore.latitude.between(latitude.subtract(rangeValue), latitude.add(rangeValue))
+                    .and(qStore.longitude.between(longitude.subtract(rangeValue), longitude.add(rangeValue))));
         }
 
-        return (List<Store>) storeRepository.findAll(builder);
+        return (List<Store>) storeRepository.findAll(builder, size);
     }
 }
