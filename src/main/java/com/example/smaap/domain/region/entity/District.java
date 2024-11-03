@@ -1,6 +1,7 @@
 package com.example.smaap.domain.region.entity;
 
 import com.example.smaap.common.entity.BaseEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,6 +20,7 @@ public class District extends BaseEntity {
     @Column(name = "name", nullable = false, length = 20)
     private String name;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "district")
     private List<Neighborhood> neighborhoods;
 
