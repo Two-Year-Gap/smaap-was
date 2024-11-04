@@ -36,7 +36,7 @@ public class RegionController {
         return ResponseEntity.ok(districtService.list(id));
     }
 
-    @GetMapping("{id}/districts/{districtId}")
+    @GetMapping("{id}/districts/{districtId}/neighborhoods")
     @Operation(summary = "구/군별 동 목록 조회", description = "구/군별 동 목록을 조회합니다.")
     @ApiResponse(responseCode = "200", description = "구/군별 동 목록 조회 성공")
     public ResponseEntity<?> list(@PathVariable Long id, @PathVariable Long districtId) {
