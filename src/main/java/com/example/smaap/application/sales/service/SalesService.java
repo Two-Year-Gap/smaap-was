@@ -32,7 +32,7 @@ public class SalesService {
 
         return cardPayments.stream()
                 .collect(Collectors.teeing(
-                        Collectors.summingInt(CardPayment::getTotalAmount),
+                        Collectors.summingLong(CardPayment::getTotalAmount),
                         Collectors.summingInt(CardPayment::getTotalUsage),
                         SalesDto.Response::of
                 ));

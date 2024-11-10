@@ -26,12 +26,12 @@ public class SalesDto {
     @Schema(name = "Sales.Response", description = "매출 조회 응답 DTO")
     public static class Response {
         @Schema(description = "매출 합계", example = "1000000")
-        private Integer salesAmount;
+        private Long salesAmount;
 
         @Schema(description = "건수 합계", example = "10")
         private Integer salesCount;
 
-        public static Response of(Integer salesAmount, Integer salesCount) {
+        public static Response of(Long salesAmount, Integer salesCount) {
             return new Response(salesAmount, salesCount);
         }
     }

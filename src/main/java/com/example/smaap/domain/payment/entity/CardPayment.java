@@ -30,13 +30,13 @@ public class CardPayment extends BaseEntity {
     private Business business;
 
     @Column(name = "total_amount", nullable = false)
-    private Integer totalAmount;
+    private Long totalAmount;
 
     @Column(name = "total_usage", nullable = false)
     private Integer totalUsage;
 
     @Builder
-    public CardPayment(Integer year, Integer month, Neighborhood neighborhood, Business business, Integer totalAmount, Integer totalUsage) {
+    public CardPayment(Integer year, Integer month, Neighborhood neighborhood, Business business, Long totalAmount, Integer totalUsage) {
         this.year = year;
         this.month = month;
         this.neighborhood = neighborhood;
