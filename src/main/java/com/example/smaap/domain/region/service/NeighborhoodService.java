@@ -19,4 +19,9 @@ public class NeighborhoodService {
     public List<Neighborhood> list(Long districtId) {
         return neighborhoodRepository.findAllByDistrictId(districtId);
     }
+
+    public Neighborhood read(Long id) {
+        return neighborhoodRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 동입니다."));
+    }
 }

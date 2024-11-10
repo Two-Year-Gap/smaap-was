@@ -15,4 +15,9 @@ public class BusinessService {
     public List<Business> list() {
         return businessRepository.findAll();
     }
+
+    public Business read(Long id) {
+        return businessRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사업자입니다."));
+    }
 }

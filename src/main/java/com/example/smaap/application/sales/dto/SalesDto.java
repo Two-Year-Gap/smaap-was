@@ -1,9 +1,8 @@
 package com.example.smaap.application.sales.dto;
 
-import com.example.smaap.domain.business.entity.Business;
-import com.example.smaap.domain.region.entity.Neighborhood;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,13 +11,14 @@ public class SalesDto {
     @NoArgsConstructor
     @AllArgsConstructor
     @Schema(name = "Sales.Request", description = "매출 조회 요청 DTO")
+    @Builder
     public static class Request {
         @Schema(description = "년도", example = "2021")
         private Integer year;
-        @Schema(description = "동네", example = "1")
-        private Neighborhood neighborhood;
-        @Schema(description = "업종", example = "1")
-        private Business business;
+        @Schema(description = "동 고유번호", example = "1")
+        private Long neighborhoodId;
+        @Schema(description = "업종 고유번호", example = "1")
+        private Long businessId;
     }
 
     @Getter
