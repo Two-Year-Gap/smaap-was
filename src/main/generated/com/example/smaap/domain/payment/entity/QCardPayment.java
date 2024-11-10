@@ -33,7 +33,7 @@ public class QCardPayment extends EntityPathBase<CardPayment> {
 
     public final com.example.smaap.domain.region.entity.QNeighborhood neighborhood;
 
-    public final NumberPath<Integer> totalAmount = createNumber("totalAmount", Integer.class);
+    public final NumberPath<Long> totalAmount = createNumber("totalAmount", Long.class);
 
     public final NumberPath<Integer> totalUsage = createNumber("totalUsage", Integer.class);
 
