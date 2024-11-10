@@ -2,6 +2,7 @@ package com.example.smaap.application.population.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,6 +13,7 @@ public class PopulationDto {
     @NoArgsConstructor
     @AllArgsConstructor
     @Schema(name = "Population.Request", description = "인구 조회 요청 DTO")
+    @Builder
     public static class Request {
         @Schema(description = "년도", example = "2021")
         private Integer year;
