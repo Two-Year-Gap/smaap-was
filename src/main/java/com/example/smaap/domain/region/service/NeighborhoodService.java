@@ -2,15 +2,18 @@ package com.example.smaap.domain.region.service;
 
 import com.example.smaap.domain.payment.entity.QCardPayment;
 import com.example.smaap.domain.population.entity.QPopulation;
+import com.example.smaap.domain.population.type.PopulationType;
 import com.example.smaap.domain.region.entity.Neighborhood;
 import com.example.smaap.domain.region.entity.QNeighborhood;
 import com.example.smaap.domain.region.repository.NeighborhoodRepository;
 import com.example.smaap.presentation.dto.NeighborhoodCountDTO;
 import com.querydsl.core.types.Projections;
+import com.querydsl.core.types.dsl.NumberExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -86,31 +89,85 @@ public class NeighborhoodService {
         QNeighborhood neighborhood = QNeighborhood.neighborhood;
         QPopulation population = QPopulation.population;
 
+        NumberExpression<BigDecimal> sumAllHours = population.population00
+                .add(population.population01)
+                .add(population.population02)
+                .add(population.population03)
+                .add(population.population04)
+                .add(population.population05)
+                .add(population.population06)
+                .add(population.population07)
+                .add(population.population08)
+                .add(population.population09)
+                .add(population.population10)
+                .add(population.population11)
+                .add(population.population12)
+                .add(population.population13)
+                .add(population.population14)
+                .add(population.population15)
+                .add(population.population16)
+                .add(population.population17)
+                .add(population.population18)
+                .add(population.population19)
+                .add(population.population20)
+                .add(population.population21)
+                .add(population.population22)
+                .add(population.population23);
+
         return queryFactory
                 .select(Projections.constructor(NeighborhoodCountDTO.Response.class,
                         neighborhood.id,
                         neighborhood.name,
-                        population.floatingCount))
+                        sumAllHours.sum()))
                 .from(neighborhood)
                 .leftJoin(population)
                 .on(population.neighborhood.id.eq(neighborhood.id))
-                .orderBy(population.floatingCount.desc())
+                .where(population.type.in(PopulationType.WORK, PopulationType.VISIT))
+                .groupBy(neighborhood.id, neighborhood.name)
+                .orderBy(sumAllHours.sum().desc())
                 .fetch();
     }
 
-    private List<NeighborhoodCountDTO.Response> findAllByResidentPopulation() {
+    private List<NeighborhoodCountDTO.Response> findAllByFloatingPopulation() {
         QNeighborhood neighborhood = QNeighborhood.neighborhood;
         QPopulation population = QPopulation.population;
+
+        NumberExpression<BigDecimal> sumAllHours = population.population00
+                .add(population.population01)
+                .add(population.population02)
+                .add(population.population03)
+                .add(population.population04)
+                .add(population.population05)
+                .add(population.population06)
+                .add(population.population07)
+                .add(population.population08)
+                .add(population.population09)
+                .add(population.population10)
+                .add(population.population11)
+                .add(population.population12)
+                .add(population.population13)
+                .add(population.population14)
+                .add(population.population15)
+                .add(population.population16)
+                .add(population.population17)
+                .add(population.population18)
+                .add(population.population19)
+                .add(population.population20)
+                .add(population.population21)
+                .add(population.population22)
+                .add(population.population23);
 
         return queryFactory
                 .select(Projections.constructor(NeighborhoodCountDTO.Response.class,
                         neighborhood.id,
                         neighborhood.name,
-                        population.residentCount))
+                        sumAllHours.sum()))
                 .from(neighborhood)
                 .leftJoin(population)
                 .on(population.neighborhood.id.eq(neighborhood.id))
-                .orderBy(population.residentCount.desc())
+                .where(population.type.in(PopulationType.HOME))
+                .groupBy(neighborhood.id, neighborhood.name)
+                .orderBy(sumAllHours.sum().desc())
                 .fetch();
     }
 
