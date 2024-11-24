@@ -6,6 +6,7 @@ import com.example.smaap.domain.population.type.PopulationType;
 import com.example.smaap.domain.region.entity.Neighborhood;
 import com.example.smaap.domain.region.entity.QNeighborhood;
 import com.example.smaap.domain.region.repository.NeighborhoodRepository;
+import com.example.smaap.domain.region.type.PopularType;
 import com.example.smaap.presentation.dto.NeighborhoodCountDTO;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.NumberExpression;
@@ -30,17 +31,17 @@ public class NeighborhoodService {
         return neighborhoodRepository.findAllByDistrictId(districtId);
     }
 
-    public List<NeighborhoodCountDTO.Response> list(String popularType) {
-        switch (popularType) {
-            case "store":
+    public List<NeighborhoodCountDTO.Response> list(PopularType type, Long count) {
+        switch (type) {
+            case STORE:
 //                return findAllByStoreCount();
                 throw new IllegalArgumentException("잘못된 정렬 기준입니다.");
-            case "sales":
-                return findAllBySales();
-            case "floating":
-                return findAllByFloatingPopulation();
-            case "resident":
-                return findAllByResidentPopulation();
+            case SALES:
+                return findAllBySales(count);
+            case FLOATING:
+                return findAllByFloatingPopulation(count);
+            case RESIDENT:
+                return findAllByResidentPopulation(count);
             default:
                 throw new IllegalArgumentException("잘못된 정렬 기준입니다.");
         }
@@ -68,7 +69,7 @@ public class NeighborhoodService {
 //                .fetch();
 //    }
 
-    private List<NeighborhoodCountDTO.Response> findAllBySales() {
+    private List<NeighborhoodCountDTO.Response> findAllBySales(Long count) {
         QNeighborhood neighborhood = QNeighborhood.neighborhood;
         QCardPayment sales = QCardPayment.cardPayment;
 
@@ -82,10 +83,11 @@ public class NeighborhoodService {
                 .on(sales.neighborhood.id.eq(neighborhood.id))
                 .groupBy(neighborhood.id, neighborhood.name)
                 .orderBy(sales.totalAmount.sum().desc())
+                .limit(count)
                 .fetch();
     }
 
-    private List<NeighborhoodCountDTO.Response> findAllByFloatingPopulation() {
+    private List<NeighborhoodCountDTO.Response> findAllByFloatingPopulation(Long count) {
         QNeighborhood neighborhood = QNeighborhood.neighborhood;
         QPopulation population = QPopulation.population;
 
@@ -125,10 +127,11 @@ public class NeighborhoodService {
                 .where(population.type.in(PopulationType.WORK, PopulationType.VISIT))
                 .groupBy(neighborhood.id, neighborhood.name)
                 .orderBy(sumAllHours.sum().desc())
+                .limit(count)
                 .fetch();
     }
 
-    private List<NeighborhoodCountDTO.Response> findAllByFloatingPopulation() {
+    private List<NeighborhoodCountDTO.Response> findAllByResidentPopulation(Long count) {
         QNeighborhood neighborhood = QNeighborhood.neighborhood;
         QPopulation population = QPopulation.population;
 
@@ -168,6 +171,7 @@ public class NeighborhoodService {
                 .where(population.type.in(PopulationType.HOME))
                 .groupBy(neighborhood.id, neighborhood.name)
                 .orderBy(sumAllHours.sum().desc())
+                .limit(count)
                 .fetch();
     }
 
