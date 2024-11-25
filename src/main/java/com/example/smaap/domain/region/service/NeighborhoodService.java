@@ -1,5 +1,8 @@
 package com.example.smaap.domain.region.service;
 
+import com.example.smaap.domain.business.entity.Business;
+import com.example.smaap.domain.business.entity.Store;
+import com.example.smaap.domain.business.service.StoreService;
 import com.example.smaap.domain.payment.entity.QCardPayment;
 import com.example.smaap.domain.population.entity.QPopulation;
 import com.example.smaap.domain.population.type.PopulationType;
@@ -8,6 +11,7 @@ import com.example.smaap.domain.region.entity.QNeighborhood;
 import com.example.smaap.domain.region.repository.NeighborhoodRepository;
 import com.example.smaap.domain.region.type.PopularType;
 import com.example.smaap.presentation.dto.NeighborhoodCountDTO;
+import com.example.smaap.presentation.dto.RecommendedBusinessDto;
 import com.querydsl.core.types.Projections;
 import com.querydsl.core.types.dsl.NumberExpression;
 import com.querydsl.jpa.impl.JPAQueryFactory;
@@ -15,12 +19,16 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class NeighborhoodService {
     private final NeighborhoodRepository neighborhoodRepository;
+    private final StoreService storeService;
     private final JPAQueryFactory queryFactory;
 
     public List<Neighborhood> list() {
@@ -50,6 +58,27 @@ public class NeighborhoodService {
     public Neighborhood read(Long id) {
         return neighborhoodRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 동입니다."));
+    }
+
+    public List<RecommendedBusinessDto.Response> recommendedBusinesses(Long id) {
+        Neighborhood neighborhood = neighborhoodRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("존재하지 않는 동입니다."));
+
+        List<Store> stores = storeService.list(neighborhood.getName());
+
+        Map<Business, Long> businessCount = stores.stream()
+                .collect(Collectors.groupingBy(Store::getBusiness, Collectors.counting()));
+
+        long totalStores = businessCount.values().stream().mapToLong(count -> count).sum();
+
+        return businessCount.entrySet().stream()
+                .map(entry -> RecommendedBusinessDto.Response.of(
+                        entry.getKey().getId(),
+                        entry.getKey().getName(),
+                        (double) entry.getValue() / totalStores * 100  // 퍼센트로 계산
+                ))
+                .sorted(Comparator.comparing(RecommendedBusinessDto.Response::getPercent).reversed())  // 내림차순 정렬
+                .collect(Collectors.toList());
     }
 
 //    private List<NeighborhoodCountDTO.Response> findAllByStoreCount() {
@@ -174,5 +203,4 @@ public class NeighborhoodService {
                 .limit(count)
                 .fetch();
     }
-
 }

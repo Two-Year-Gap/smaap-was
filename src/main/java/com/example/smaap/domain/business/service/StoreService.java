@@ -36,4 +36,9 @@ public class StoreService {
 
         return (List<Store>) storeRepository.findAll(builder, size);
     }
+
+    public List<Store> list(String neighborhoodName) {
+        return storeRepository.findAll().stream().filter(s -> s.getLotNumberAddress().contains(neighborhoodName))
+                .toList();
+    }
 }
