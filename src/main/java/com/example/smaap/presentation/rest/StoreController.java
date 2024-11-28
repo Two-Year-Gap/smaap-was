@@ -24,11 +24,11 @@ public class StoreController {
     @Operation(summary = "상점 목록 조회", description = "상점 목록을 조회합니다.")
     @ApiResponse(responseCode = "200", description = "상점 목록 조회 성공")
     public ResponseEntity<?> list(@RequestParam(required = false) Long businessId,
-                                  @RequestParam(required = false) String address,
+                                  @RequestParam(required = false) Long neighborhoodId,
                                   @RequestParam(required = false) BigDecimal latitude,
                                   @RequestParam(required = false) BigDecimal longitude,
                                   @RequestParam(defaultValue = "1000") Long range,
                                   @RequestParam(defaultValue = "100") int size) {
-        return ResponseEntity.ok(storeService.list(businessId, address, latitude, longitude, range, size));
+        return ResponseEntity.ok(storeService.list(businessId, neighborhoodId, latitude, longitude, range, size));
     }
 }

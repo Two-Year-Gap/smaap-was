@@ -37,6 +37,8 @@ public class QStore extends EntityPathBase<Store> {
 
     public final StringPath name = createString("name");
 
+    public final com.example.smaap.domain.region.entity.QNeighborhood neighborhood;
+
     public final StringPath readNameAddress = createString("readNameAddress");
 
     public QStore(String variable) {
@@ -58,6 +60,7 @@ public class QStore extends EntityPathBase<Store> {
     public QStore(Class<? extends Store> type, PathMetadata metadata, PathInits inits) {
         super(type, metadata, inits);
         this.business = inits.isInitialized("business") ? new QBusiness(forProperty("business")) : null;
+        this.neighborhood = inits.isInitialized("neighborhood") ? new com.example.smaap.domain.region.entity.QNeighborhood(forProperty("neighborhood"), inits.get("neighborhood")) : null;
     }
 
 }

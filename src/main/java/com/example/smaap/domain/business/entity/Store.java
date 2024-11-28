@@ -1,10 +1,12 @@
 package com.example.smaap.domain.business.entity;
 
 import com.example.smaap.common.entity.BaseEntity;
+import com.example.smaap.domain.region.entity.Neighborhood;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -33,12 +35,18 @@ public class Store extends BaseEntity {
     @Column(name = "longitude", precision = 13, scale = 10, nullable = false)
     private BigDecimal longitude;
 
-    public Store(String name, Business business, String lotNumberAddress, String readNameAddress, BigDecimal latitude, BigDecimal longitude) {
+    @ManyToOne
+    @JoinColumn(name = "neighborhood_id")
+    private Neighborhood neighborhood;
+
+    @Builder
+    public Store(String name, Business business, String lotNumberAddress, String readNameAddress, BigDecimal latitude, BigDecimal longitude, Neighborhood neighborhood) {
         this.name = name;
         this.business = business;
         this.lotNumberAddress = lotNumberAddress;
         this.readNameAddress = readNameAddress;
         this.latitude = latitude;
         this.longitude = longitude;
+        this.neighborhood = neighborhood;
     }
 }
