@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.math.BigDecimal;
 
 @RestController
-@RequestMapping("/welafre-infra")
+@RequestMapping("/welfare-infra")
 @Tag(name = "Business", description = "업종 관련 API")
 @RequiredArgsConstructor
 public class WelfareInfraController {
