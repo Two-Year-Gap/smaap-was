@@ -16,7 +16,7 @@ import java.util.List;
 public class WelfareInfraService {
     private final WelfareInfraRepository welfareInfraRepository;
 
-    private List<WelfareInfra> list(BigDecimal latitude, BigDecimal longitude, Long range, WelfareInfraType type) {
+    public List<WelfareInfra> list(BigDecimal latitude, BigDecimal longitude, Long range, WelfareInfraType type) {
         QWelfareInfra qWelfareInfra = QWelfareInfra.welfareInfra;
         BooleanBuilder builder = new BooleanBuilder();
 
