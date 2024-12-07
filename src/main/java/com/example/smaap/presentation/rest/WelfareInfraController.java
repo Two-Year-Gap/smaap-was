@@ -15,7 +15,7 @@ import java.math.BigDecimal;
 
 @RestController
 @RequestMapping("/welfare-infra")
-@Tag(name = "Business", description = "업종 관련 API")
+@Tag(name = "WelfareInfra", description = "복지성 인프라 관련 API")
 @RequiredArgsConstructor
 public class WelfareInfraController {
     private final WelfareInfraService welfareInfraService;

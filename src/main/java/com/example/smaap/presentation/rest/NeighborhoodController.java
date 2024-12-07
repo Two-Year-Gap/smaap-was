@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/neighborhoods")
-@Tag(name = "Neiborhoods", description = "동 정보 API")
+@Tag(name = "Neighborhoods", description = "동 정보 API")
 @RequiredArgsConstructor
 public class NeighborhoodController {
     private final NeighborhoodService neighborhoodService;
