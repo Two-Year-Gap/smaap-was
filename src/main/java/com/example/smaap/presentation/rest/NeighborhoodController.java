@@ -16,7 +16,7 @@ public class NeighborhoodController {
     private final NeighborhoodService neighborhoodService;
 
     @GetMapping("")
-    @Operation(summary = "인기 상권 조회", description = "인기 상권을 조회합니다.")
+    @Operation(summary = "인기 상권 조회", description = "조건(PopularType)에 따른 인기 상권(동)을 조회합니다.")
     public ResponseEntity<?> list(@RequestParam PopularType type, @RequestParam(defaultValue = "5") Long count) {
         return ResponseEntity.ok(neighborhoodService.list(type, count));
     }
