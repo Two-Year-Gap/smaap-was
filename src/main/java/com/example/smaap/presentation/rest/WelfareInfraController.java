@@ -25,7 +25,8 @@ public class WelfareInfraController {
     public ResponseEntity<?> list(@RequestParam BigDecimal latitude,
                                   @RequestParam BigDecimal longitude,
                                   @RequestParam(defaultValue = "1000") Long range,
-                                  @RequestParam(required = false) WelfareInfraType type) {
-        return ResponseEntity.ok(welfareInfraService.list(latitude, longitude, range, type));
+                                  @RequestParam(required = false) WelfareInfraType type,
+                                  @RequestParam(defaultValue = "100") int size) {
+        return ResponseEntity.ok(welfareInfraService.list(latitude, longitude, range, type, size));
     }
 }

@@ -16,7 +16,7 @@ import java.util.List;
 public class WelfareInfraService {
     private final WelfareInfraRepository welfareInfraRepository;
 
-    public List<WelfareInfra> list(BigDecimal latitude, BigDecimal longitude, Long range, WelfareInfraType type) {
+    public List<WelfareInfra> list(BigDecimal latitude, BigDecimal longitude, Long range, WelfareInfraType type, int size) {
         QWelfareInfra qWelfareInfra = QWelfareInfra.welfareInfra;
         BooleanBuilder builder = new BooleanBuilder();
 
@@ -30,6 +30,6 @@ public class WelfareInfraService {
             builder.and(qWelfareInfra.type.eq(type));
         }
 
-        return (List<WelfareInfra>) welfareInfraRepository.findAll(builder);
+        return (List<WelfareInfra>) welfareInfraRepository.findAll(builder, size);
     }
 }
