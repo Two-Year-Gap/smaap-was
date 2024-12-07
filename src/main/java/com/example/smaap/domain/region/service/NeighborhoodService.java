@@ -1,6 +1,7 @@
 package com.example.smaap.domain.region.service;
 
 import com.example.smaap.domain.business.entity.Business;
+import com.example.smaap.domain.business.entity.QStore;
 import com.example.smaap.domain.business.entity.Store;
 import com.example.smaap.domain.business.service.StoreService;
 import com.example.smaap.domain.payment.entity.QCardPayment;
@@ -40,19 +41,13 @@ public class NeighborhoodService {
     }
 
     public List<NeighborhoodCountDTO.Response> list(PopularType type, Long count) {
-        switch (type) {
-            case STORE:
-//                return findAllByStoreCount();
-                throw new IllegalArgumentException("잘못된 정렬 기준입니다.");
-            case SALES:
-                return findAllBySales(count);
-            case FLOATING:
-                return findAllByFloatingPopulation(count);
-            case RESIDENT:
-                return findAllByResidentPopulation(count);
-            default:
-                throw new IllegalArgumentException("잘못된 정렬 기준입니다.");
-        }
+        return switch (type) {
+            case STORE -> findAllByStoreCount(count);
+            case SALES -> findAllBySales(count);
+            case FLOATING -> findAllByFloatingPopulation(count);
+            case RESIDENT -> findAllByResidentPopulation(count);
+            default -> throw new IllegalArgumentException("잘못된 정렬 기준입니다.");
+        };
     }
 
     public Neighborhood read(Long id) {
@@ -81,22 +76,23 @@ public class NeighborhoodService {
                 .collect(Collectors.toList());
     }
 
-//    private List<NeighborhoodCountDTO.Response> findAllByStoreCount() {
-//        QNeighborhood neighborhood = QNeighborhood.neighborhood;
-//        QStore store = QStore.store;
-//
-//        return queryFactory
-//                .select(Projections.constructor(NeighborhoodCountDTO.Response.class,
-//                        neighborhood.id,
-//                        neighborhood.name,
-//                        store.count()))
-//                .from(neighborhood)
-//                .leftJoin(store)
-//                .on(store.neighborhood.id.eq(neighborhood.id))
-//                .groupBy(neighborhood.id, neighborhood.name)
-//                .orderBy(store.count().desc())
-//                .fetch();
-//    }
+    private List<NeighborhoodCountDTO.Response> findAllByStoreCount(Long count) {
+        QNeighborhood neighborhood = QNeighborhood.neighborhood;
+        QStore store = QStore.store;
+
+        return queryFactory
+                .select(Projections.constructor(NeighborhoodCountDTO.Response.class,
+                        neighborhood.id,
+                        neighborhood.name,
+                        store.count()))
+                .from(neighborhood)
+                .leftJoin(store)
+                .on(store.neighborhood.id.eq(neighborhood.id))
+                .groupBy(neighborhood.id, neighborhood.name)
+                .orderBy(store.count().desc())
+                .limit(count)
+                .fetch();
+    }
 
     private List<NeighborhoodCountDTO.Response> findAllBySales(Long count) {
         QNeighborhood neighborhood = QNeighborhood.neighborhood;
