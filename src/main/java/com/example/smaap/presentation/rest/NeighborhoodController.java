@@ -22,7 +22,7 @@ public class NeighborhoodController {
     }
 
     @GetMapping("/{id}/recommended-businesses")
-    @Operation(summary = "유망 상권 조회", description = "유망 상권을 조회합니다.")
+    @Operation(summary = "상권(동)에 따른 업종 조회", description = "상권(동)에 따른 추천 업종을 조회합니다.")
     public ResponseEntity<?> recommendedBusinesses(@PathVariable Long id) {
         return ResponseEntity.ok(neighborhoodService.recommendedBusinesses(id));
     }
