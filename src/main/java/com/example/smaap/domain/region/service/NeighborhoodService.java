@@ -149,7 +149,7 @@ public class NeighborhoodService {
                 .select(Projections.constructor(NeighborhoodCountDTO.Response.class,
                         neighborhood.id,
                         neighborhood.name,
-                        sumAllHours.sum()))
+                        sumAllHours.sum().longValue()))
                 .from(neighborhood)
                 .leftJoin(population)
                 .on(population.neighborhood.id.eq(neighborhood.id))
@@ -193,7 +193,7 @@ public class NeighborhoodService {
                 .select(Projections.constructor(NeighborhoodCountDTO.Response.class,
                         neighborhood.id,
                         neighborhood.name,
-                        sumAllHours.sum()))
+                        sumAllHours.sum().longValue()))
                 .from(neighborhood)
                 .leftJoin(population)
                 .on(population.neighborhood.id.eq(neighborhood.id))
