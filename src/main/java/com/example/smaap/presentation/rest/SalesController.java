@@ -19,7 +19,7 @@ public class SalesController {
 
     @GetMapping
     public ResponseEntity<?> read(@RequestParam Integer year,
-                                  @RequestParam(name = "neiborhood_id") Long neighborhoodId,
+                                  @RequestParam(name = "neighborhood_id") Long neighborhoodId,
                                   @RequestParam(name = "business_id", required = false) Long businessId
     ) {
         SalesDto.Request dto = SalesDto.Request.builder()
